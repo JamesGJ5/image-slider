@@ -40,4 +40,5 @@ button.arrow {
     height: 50px;
     outline: solid black 2px;
     display: flex;
+    justify-content: space-evenly;
 }
