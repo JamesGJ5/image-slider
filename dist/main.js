@@ -1,0 +1,1 @@
+(()=>{"use strict";class e{constructor(e){this.carouselContainer=e}}class t{static loadCarousels(){t.getCarouselContainerList().forEach((e=>t.makeCarousel(e)))}static getCarouselContainerList(){return document.querySelectorAll(".carousel")}static makeCarousel(t){return new e(t)}}document.addEventListener("DOMContentLoaded",t.loadCarousels)})();
