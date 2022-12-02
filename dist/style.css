@@ -37,8 +37,19 @@ button.arrow {
 }
 
 .navigation {
-    height: 50px;
     outline: solid black 2px;
     display: flex;
     justify-content: space-evenly;
+}
+
+button.dot {
+    flex: none;
+    width: 30px;
+    height: 30px;
+    border: solid black 2px;
+    border-radius: 50%;
+}
+
+button.dot .active {
+    background-color: black;
 }
