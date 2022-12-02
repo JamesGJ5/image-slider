@@ -3,6 +3,41 @@ body {
 }
 
 .aperture {
+    --aperture-width: 100vw;
+
     position: relative;
-    height: 1000px;
+    width: var(--aperture-width);
+    height: 600px;
+    display: flex;
+    overflow: hidden;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.slide-list {
+    position: absolute;
+    /* JS will have to augment the property "left" */
+    z-index: -1;
+    height: 100%;
+    display: flex;
+}
+
+.slide-list img {
+    height: 100%;
+    min-width: var(--aperture-width);
+}
+
+button.arrow {
+    margin: 0;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    background-color: inherit;
+}
+
+.navigation {
+    height: 50px;
+    outline: solid black 2px;
+    display: flex;
 }
