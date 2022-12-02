@@ -2,7 +2,7 @@ body {
     margin: 0;
 }
 
-.image-carousel {
+.carousel {
     --aperture-width: 100vw;
 
     position: relative;
