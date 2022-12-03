@@ -2,7 +2,7 @@ export default class Carousel {
   constructor(carouselContainer) {
     this.carouselContainer = carouselContainer;
     this.slideQuantity = this.countSlides();
-    this.currentSlideIndex = this.initialiseCurrentImageIndex();
+    this.currentSlideIndex = this.initialiseCurrentSlideIndex();
 
     this.fillNavigationBar();
     this.activateArrowButton('right');
@@ -24,7 +24,7 @@ export default class Carousel {
     return this.carouselContainer.querySelectorAll('.slide-list img').length;
   }
 
-  initialiseCurrentImageIndex() {
+  initialiseCurrentSlideIndex() {
     return this.slideQuantity ? 0 : null;
   }
 
