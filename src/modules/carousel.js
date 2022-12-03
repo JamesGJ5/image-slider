@@ -90,7 +90,7 @@ export default class Carousel {
 
   displayCurrentSlide() {
     const slideListDiv = this.getSlideListDiv();
-    const newXCoordinate = -1 * 100 * this.currentSlideIndex / this.slideQuantity
+    const newXCoordinate = (-1 * 100 * this.currentSlideIndex) / this.slideQuantity;
     slideListDiv.style.transform = `translateX(${newXCoordinate}%)`;
   }
 
