@@ -7,7 +7,8 @@ export default class Carousel {
     this.activateNavigationBar();
     this.activateArrowButton('right');
     this.activateArrowButton('left');
-    // this.advancementTimer = this.startTimer(2000);
+    this.addTransitionHandlers();
+    this.startAdvancementTimer();
   }
 
   set currentSlideIndex(value) {
@@ -91,6 +92,8 @@ export default class Carousel {
   displayCurrentSlide() {
     const slideListDiv = this.getSlideListDiv();
     const newXCoordinate = (-1 * 100 * this.currentSlideIndex) / this.slideQuantity;
+    // See this.addTransitionHandlers in constructor--transition using below won't
+    // conflict with this.advancementTimer
     slideListDiv.style.transform = `translateX(${newXCoordinate}%)`;
   }
 
@@ -104,7 +107,19 @@ export default class Carousel {
     navigationBar.childNodes[this.currentSlideIndex].classList.add('active');
   }
 
-  startTimer(milliseconds) {
-    return setInterval(() => this.incrementSlide(1), milliseconds);
+  addTransitionHandlers() {
+    const slideListDiv = this.getSlideListDiv();
+    this.stopAdvancementTimer = this.stopAdvancementTimer.bind(this);
+    slideListDiv.addEventListener('transitionstart', this.stopAdvancementTimer);
+    this.startAdvancementTimer = this.startAdvancementTimer.bind(this);
+    slideListDiv.addEventListener('transitionend', this.startAdvancementTimer);
+  }
+
+  startAdvancementTimer() {
+    this.advancementTimer = setInterval(() => this.incrementSlide(1), 5000);
+  }
+
+  stopAdvancementTimer() {
+    clearInterval(this.advancementTimer);
   }
 }
