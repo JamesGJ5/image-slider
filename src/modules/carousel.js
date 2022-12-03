@@ -2,22 +2,22 @@ export default class Carousel {
   constructor(carouselContainer) {
     this.carouselContainer = carouselContainer;
     this.slideQuantity = this.countSlides();
-    this.currentImageIndex = this.initialiseCurrentImageIndex();
+    this.currentSlideIndex = this.initialiseCurrentImageIndex();
 
     this.fillNavigationBar();
     this.activateRightArrowButton();
     // this.activateLeftArrowButton();
   }
 
-  set currentImageIndex(value) {
+  set currentSlideIndex(value) {
     if (value !== null) {
-      this._currentImageIndex =
+      this._currentSlideIndex =
         ((value % this.slideQuantity) + this.slideQuantity) % this.slideQuantity;
     }
   }
 
-  get currentImageIndex() {
-    return this._currentImageIndex;
+  get currentSlideIndex() {
+    return this._currentSlideIndex;
   }
 
   countSlides() {
@@ -58,7 +58,7 @@ export default class Carousel {
   }
 
   incrementSlide(change) {
-    this.currentImageIndex += change;
+    this.currentSlideIndex += change;
     this.goToCurrentSlide();
   }
 
@@ -68,7 +68,7 @@ export default class Carousel {
 
   displayCurrentSlide() {
     const slideListDiv = this.getSlideListDiv();
-    const newLeft = `${-1 * 100 * this.currentImageIndex}%`;
+    const newLeft = `${-1 * 100 * this.currentSlideIndex}%`;
     slideListDiv.style.left = newLeft;
   }
 
