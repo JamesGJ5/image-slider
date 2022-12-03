@@ -64,6 +64,7 @@ export default class Carousel {
 
   goToCurrentSlide() {
     this.displayCurrentSlide();
+    this.updateActiveNavigationDot();
   }
 
   displayCurrentSlide() {
@@ -74,5 +75,11 @@ export default class Carousel {
 
   getSlideListDiv() {
     return document.querySelector('.slide-list');
+  }
+
+  updateActiveNavigationDot() {
+    const navigationBar = this.getNavigationBar();
+    navigationBar.querySelector('.active').classList.remove('active');
+    navigationBar.childNodes[this.currentSlideIndex].classList.add('active');
   }
 }
