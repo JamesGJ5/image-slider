@@ -4,7 +4,7 @@ export default class Carousel {
     this.slideQuantity = this.countSlides();
     this.currentSlideIndex = this.initialiseCurrentSlideIndex();
 
-    this.fillNavigationBar();
+    this.activateNavigationBar();
     this.activateArrowButton('right');
     this.activateArrowButton('left');
   }
@@ -28,15 +28,20 @@ export default class Carousel {
     return this.slideQuantity ? 0 : null;
   }
 
-  fillNavigationBar() {
+  activateNavigationBar() {
     const navigationBar = this.getNavigationBar();
-    for (let slideIndex = 0; slideIndex < this.slideQuantity; slideIndex += 1) {
-      navigationBar.appendChild(this.makeNavigationDot(slideIndex));
-    }
+    this.populateDisplay(navigationBar);
   }
 
   getNavigationBar() {
     return this.carouselContainer.querySelector('.navigation');
+  }
+
+  populateDisplay(navigationBar) {
+    for (let slideIndex = 0; slideIndex < this.slideQuantity; slideIndex += 1) {
+      navigationBar.appendChild(this.makeNavigationDot(slideIndex));
+    }
+    this.activateDots(navigationBar);
   }
 
   makeNavigationDot(slideIndex) {
@@ -45,7 +50,16 @@ export default class Carousel {
     if (slideIndex === 0) {
       navigationDot.classList.add('active');
     }
+    navigationDot.setAttribute('data-slide-index', slideIndex);
     return navigationDot;
+  }
+
+  activateDots(navigationBar) {
+    navigationBar.querySelectorAll('.dot').forEach((navigationDot) => {
+      navigationDot.addEventListener('click', () =>
+        this.changeSlide(parseInt(navigationDot.getAttribute('data-slide-index'), 10))
+      );
+    });
   }
 
   activateArrowButton(direction) {
@@ -63,12 +77,12 @@ export default class Carousel {
     return this.carouselContainer.querySelector(`button.arrow.${direction}`);
   }
 
-  incrementSlide(change) {
-    this.currentSlideIndex += change;
-    this.goToCurrentSlide();
+  incrementSlide(difference) {
+    this.changeSlide(this.currentSlideIndex + difference);
   }
 
-  goToCurrentSlide() {
+  changeSlide(newSlideIndex) {
+    this.currentSlideIndex = newSlideIndex;
     this.displayCurrentSlide();
     this.updateActiveNavigationDot();
   }
