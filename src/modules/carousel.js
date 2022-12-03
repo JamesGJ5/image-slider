@@ -5,6 +5,19 @@ export default class Carousel {
     this.currentImageIndex = this.initialiseCurrentImageIndex();
 
     this.fillNavigationBar();
+    this.activateRightArrowButton();
+    // this.activateLeftArrowButton();
+  }
+
+  set currentImageIndex(value) {
+    if (value !== null) {
+      this._currentImageIndex =
+        ((value % this.slideQuantity) + this.slideQuantity) % this.slideQuantity;
+    }
+  }
+
+  get currentImageIndex() {
+    return this._currentImageIndex;
   }
 
   countSlides() {
@@ -33,5 +46,18 @@ export default class Carousel {
       navigationDot.classList.add('active');
     }
     return navigationDot;
+  }
+
+  activateRightArrowButton() {
+    const rightArrowButton = this.getArrowButton('right');
+    rightArrowButton.addEventListener('click', () => this.incrementSlide(+1));
+  }
+
+  getArrowButton(direction) {
+    return this.carouselContainer.querySelector(`button.arrow.${direction}`);
+  }
+
+  incrementSlide(change) {
+    this.currentImageIndex += change;
   }
 }
