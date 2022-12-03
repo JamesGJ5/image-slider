@@ -50,6 +50,6 @@ button.dot {
     border-radius: 50%;
 }
 
-button.dot .active {
+button.dot.active {
     background-color: black;
 }
