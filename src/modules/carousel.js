@@ -5,8 +5,8 @@ export default class Carousel {
     this.currentSlideIndex = this.initialiseCurrentImageIndex();
 
     this.fillNavigationBar();
-    this.activateRightArrowButton();
-    // this.activateLeftArrowButton();
+    this.activateArrowButton('right');
+    this.activateArrowButton('left');
   }
 
   set currentSlideIndex(value) {
@@ -48,9 +48,15 @@ export default class Carousel {
     return navigationDot;
   }
 
-  activateRightArrowButton() {
-    const rightArrowButton = this.getArrowButton('right');
-    rightArrowButton.addEventListener('click', () => this.incrementSlide(+1));
+  activateArrowButton(direction) {
+    const arrowButton = this.getArrowButton(direction);
+    let change;
+    if (direction === 'right') {
+      change = 1;
+    } else if (direction === 'left') {
+      change = -1;
+    }
+    arrowButton.addEventListener('click', () => this.incrementSlide(change));
   }
 
   getArrowButton(direction) {
