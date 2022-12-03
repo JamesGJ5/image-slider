@@ -59,5 +59,20 @@ export default class Carousel {
 
   incrementSlide(change) {
     this.currentImageIndex += change;
+    this.goToSlide(this.currentImageIndex);
+  }
+
+  goToSlide(slideIndex) {
+    this.displaySlide(slideIndex);
+  }
+
+  displaySlide(slideIndex) {
+    const slideListDiv = this.getSlideListDiv();
+    const newLeft = `${-1 * 100 * slideIndex}%`;
+    slideListDiv.style.left = newLeft;
+  }
+
+  getSlideListDiv() {
+    return document.querySelector('.slide-list');
   }
 }
