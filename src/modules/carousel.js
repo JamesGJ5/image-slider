@@ -7,7 +7,7 @@ export default class Carousel {
     this.activateNavigationBar();
     this.activateArrowButton('right');
     this.activateArrowButton('left');
-    this.advancementTimer = this.startTimer(5000);
+    // this.advancementTimer = this.startTimer(2000);
   }
 
   set currentSlideIndex(value) {
@@ -90,8 +90,8 @@ export default class Carousel {
 
   displayCurrentSlide() {
     const slideListDiv = this.getSlideListDiv();
-    const newLeft = `${-1 * 100 * this.currentSlideIndex}%`;
-    slideListDiv.style.left = newLeft;
+    const newXCoordinate = -1 * 100 * this.currentSlideIndex / this.slideQuantity
+    slideListDiv.style.transform = `translateX(${newXCoordinate}%)`;
   }
 
   getSlideListDiv() {
