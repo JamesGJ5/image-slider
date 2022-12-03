@@ -7,6 +7,7 @@ export default class Carousel {
     this.activateNavigationBar();
     this.activateArrowButton('right');
     this.activateArrowButton('left');
+    this.advancementTimer = this.startTimer(5000);
   }
 
   set currentSlideIndex(value) {
@@ -101,5 +102,9 @@ export default class Carousel {
     const navigationBar = this.getNavigationBar();
     navigationBar.querySelector('.active').classList.remove('active');
     navigationBar.childNodes[this.currentSlideIndex].classList.add('active');
+  }
+
+  startTimer(milliseconds) {
+    return setInterval(() => this.incrementSlide(1), milliseconds);
   }
 }
