@@ -1,0 +1,1 @@
+Object-oriented image slider made with some random, royalty-free images.
